@@ -68,6 +68,17 @@ public class Meno {
     public void setPriezvisko(String priezvisko) {
         this.priezvisko = priezvisko;
     }
+
+    @Override
+    public String toString() {
+        return "Meno{" +
+                "titulPred='" + titulPred + '\'' +
+                ", titulZa='" + titulZa + '\'' +
+                ", prveMeno='" + prveMeno + '\'' +
+                ", stredneMeno='" + stredneMeno + '\'' +
+                ", priezvisko='" + priezvisko + '\'' +
+                '}';
+    }
 }
 
 

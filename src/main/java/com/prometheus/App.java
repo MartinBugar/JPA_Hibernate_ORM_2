@@ -59,9 +59,11 @@ public class App
         List <Osoba>  osoby = entityManager.createQuery("from Osoba",Osoba.class).getResultList();
         for (Osoba os : osoby){
             System.out.println("Osoba id : " + os.getId() +
-                    "pohlavie : " + os.getPohlavie() +
-                    "kod osoby : " + os.getPohlavie().getKod());
+                    ", pohlavie : " + os.getPohlavie() +
+                    ", kod osoby : " + os.getPohlavie().getKod() +
+            ", meno :" + os.getMeno());
         }
+
         entityManager.getTransaction().commit();
         entityManager.close();
 
