@@ -77,3 +77,10 @@ public class Message {
         return Objects.hash(id, message);
     }
 }
+
+//  CREATE TABLE Message (
+//    ID int(19) NOT NULL AUTO_INCREMENT,
+//    MESSAGE nvarchar(255),
+//    CREATE_DATE timestamp DEFAULT CURRENT_TIMESTAMP,
+//    PRIMARY KEY(ID)
+//  );

@@ -1,5 +1,6 @@
 package com.prometheus;
 
+import com.prometheus.entity.Meno;
 import com.prometheus.entity.Message;
 import com.prometheus.entity.Osoba;
 import com.prometheus.enums.Pohlavie;
@@ -39,10 +40,19 @@ public class App
 //        entityManager.getTransaction().commit();
 //        entityManager.close();
 
+//        entityManager.getTransaction().begin();
+//        entityManager.persist(new Osoba(Pohlavie.MUZ));
+//        entityManager.persist(new Osoba(Pohlavie.ZENA));
+//        entityManager.persist(new Osoba(Pohlavie.MUZ));
+//        entityManager.getTransaction().commit();
+
+
+        Osoba osoba1 = new Osoba();
+        osoba1.setPohlavie(Pohlavie.MUZ);
+        osoba1.setMeno(new Meno("Mgr.","Peter","Juraj","Kratky","Phd"));
+
         entityManager.getTransaction().begin();
-        entityManager.persist(new Osoba(Pohlavie.MUZ));
-        entityManager.persist(new Osoba(Pohlavie.ZENA));
-        entityManager.persist(new Osoba(Pohlavie.MUZ));
+        entityManager.persist(osoba1);
         entityManager.getTransaction().commit();
 
         entityManager.getTransaction().begin();

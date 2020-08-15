@@ -10,7 +10,6 @@ public enum Pohlavie {
     private char kod;
 
     Pohlavie (char kod){
-
         this.kod = kod;
     }
 

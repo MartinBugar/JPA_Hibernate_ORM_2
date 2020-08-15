@@ -15,6 +15,17 @@ public class Osoba {
     @Convert(converter = PohlavieConverter.class) //anotaciou sme povedali ze pohlavie budeme konvertovat pomocou PohlavieConverter classy
     private Pohlavie pohlavie;
 
+    @Embedded
+    private Meno meno;
+
+    public Meno getMeno() {
+        return meno;
+    }
+
+    public void setMeno(Meno meno) {
+        this.meno = meno;
+    }
+
     public Osoba(){}
 
     public Osoba(Pohlavie pohlavie) {
@@ -37,3 +48,9 @@ public class Osoba {
         this.pohlavie = pohlavie;
     }
 }
+
+//CREATE TABLE Osoba(
+//  ID int(19) NOT NULL AUTO_INCREMENT,
+//  POHLAVIE varchar(1) DEFAULT NULL,
+//  PRIMARY KEY (ID)
+//);
