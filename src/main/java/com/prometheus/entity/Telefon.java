@@ -3,7 +3,7 @@ package com.prometheus.entity;
 import javax.persistence.*;
 
 @Entity
-public class Telefon {
+public class Telefon { // toto je child trieda
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +13,7 @@ public class Telefon {
     private String cislo;
 
     @ManyToOne//vela telefonov pre jednu osobu
-    @JoinColumn(name = "osoba_id",foreignKey = @ForeignKey(name = "fk_telefon_osoba_id"))
+    @JoinColumn(name = "osoba_id",foreignKey = @ForeignKey(name = "fk_telefon_osoba_id")) // cudyi kluc v databaze
     private Osoba osoba;
 
 

@@ -4,8 +4,11 @@ import com.prometheus.converters.PohlavieConverter;
 import com.prometheus.enums.Pohlavie;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+//parent trieda
 public class Osoba extends Obcan{ // osoba dedi vsetko z obcana - vsetko co je v obcanovi je sucastou triedy osoba
 
     @Id
@@ -26,7 +29,31 @@ public class Osoba extends Obcan{ // osoba dedi vsetko z obcana - vsetko co je v
         this.meno = meno;
     }
 
+    // ak je na jednej strane ManyToOne  a na druhej stranke OneToMany tak je to obojsmerne
+    //kazda obojsmerna asociacia musi mat nejakeho vlastnika, vlastnik je vzdy child strana
+    //parentova strana je referencovana
+    @OneToMany(mappedBy = "osoba")
+    private List <Telefon> telefons = new ArrayList<>(); //OneToMany - jedna osoba k viac telefonom
+
     public Osoba(){}
+
+    @Override
+    public String toString() {
+        return "Osoba{" +
+                "id=" + id +
+                ", pohlavie=" + pohlavie +
+                ", meno=" + meno +
+                ", telefons=" + telefons +
+                '}' + super.toString();
+    }
+
+    public List<Telefon> getTelefons() {
+        return telefons;
+    }
+
+    public void setTelefons(List<Telefon> telefons) {
+        this.telefons = telefons;
+    }
 
     public Osoba(Pohlavie pohlavie) {
         this.pohlavie = pohlavie;
@@ -48,14 +75,6 @@ public class Osoba extends Obcan{ // osoba dedi vsetko z obcana - vsetko co je v
         this.pohlavie = pohlavie;
     }
 
-    @Override
-    public String toString() {
-        return "Osoba{" +
-                "id=" + id +
-                ", pohlavie=" + pohlavie +
-                ", meno=" + meno +
-                '}' + super.toString();
-    }
 }
 
 //CREATE TABLE Osoba(
@@ -63,3 +82,8 @@ public class Osoba extends Obcan{ // osoba dedi vsetko z obcana - vsetko co je v
 //  POHLAVIE varchar(1) DEFAULT NULL,
 //  PRIMARY KEY (ID)
 //);
+
+//pripojenie na telefon
+//        select *
+//        from osoba
+//        LEFT JOIN telefon on osoba.id = telefon.OSOBA_ID;

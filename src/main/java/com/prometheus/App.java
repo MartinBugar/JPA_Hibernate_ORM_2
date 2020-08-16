@@ -9,6 +9,7 @@ import com.prometheus.enums.Pohlavie;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -54,9 +55,80 @@ public class App
         //deleteTelefon(entityManager);
         //deleteOsobaSTelefonom(entityManager);
         //getTelefon(entityManager);
-        saveViacTelefonovKOsobe(entityManager);
+        // saveViacTelefonovKOsobe(entityManager);
+        //nacitajOsobuPridajTelefon(entityManager);
+        saveOsobaSaveTelefony(entityManager);
         entityManager.close();
 
+    }
+
+    //vytvorim novu osobu a nove telefony a nasetujem to navzajom - obojsmerne druha metoda
+    private static void saveOsobaSaveTelefony2(EntityManager entityManager){
+        entityManager.getTransaction().begin();
+
+        Osoba osoba = new Osoba();
+        osoba.setPohlavie(Pohlavie.MUZ);
+        osoba.setMeno(new Meno(null, null, "Martin",null,"LALALA"));
+        osoba.setCisloOp("X458XXXXX");
+
+        Telefon telefon1 = new Telefon();
+        telefon1.setCislo("01111111111");
+        telefon1.setOsoba(osoba);
+
+        Telefon telefon2 = new Telefon();
+        telefon2.setCislo("0000000000000000");
+        telefon2.setOsoba(osoba);
+
+
+        osoba.getTelefons().add(telefon1);
+        osoba.getTelefons().add(telefon2);
+
+        entityManager.persist(osoba);
+        entityManager.getTransaction().commit();
+    }
+
+
+    //vytvorim novu osobu a nove telefony a nasetujem to navzajom - obojsmerne
+    private static void saveOsobaSaveTelefony(EntityManager entityManager){
+        entityManager.getTransaction().begin();
+
+        Osoba osoba = new Osoba();
+        osoba.setPohlavie(Pohlavie.MUZ);
+        osoba.setMeno(new Meno(null, null, "Martin",null,"LALALA"));
+        osoba.setCisloOp("X458XXXXX");
+        ArrayList <Telefon> telefons = new ArrayList<>();
+
+        Telefon telefon1 = new Telefon();
+        telefon1.setCislo("01111111111");
+        telefon1.setOsoba(osoba);
+
+        Telefon telefon2 = new Telefon();
+        telefon2.setCislo("0000000000000000");
+        telefon2.setOsoba(osoba);
+
+        telefons.add(telefon1);
+        telefons.add(telefon2);
+        osoba.setTelefons(telefons);
+
+        entityManager.persist(osoba);
+        entityManager.persist(telefon1);
+        entityManager.persist(telefon2);
+        entityManager.getTransaction().commit();
+    }
+
+    private static void nacitajOsobuPridajTelefon(EntityManager entityManager){
+        entityManager.getTransaction().begin();
+
+        Osoba osoba = entityManager.find(Osoba.class, 8L);
+
+        Telefon telefon = new Telefon();
+        telefon.setCislo("0902156000");
+        telefon.setOsoba(osoba);
+
+        osoba.getTelefons().add(telefon); //zoberiem si vsetky telefony osoby a pridaj jej tento vytvoreny
+
+        entityManager.persist(telefon);
+        entityManager.getTransaction().commit();
     }
 
     private static void saveViacTelefonovKOsobe (EntityManager entityManager){
