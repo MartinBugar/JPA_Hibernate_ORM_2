@@ -6,7 +6,7 @@ import com.prometheus.enums.Pohlavie;
 import javax.persistence.*;
 
 @Entity
-public class Osoba {
+public class Osoba extends Obcan{ // osoba dedi vsetko z obcana - vsetko co je v obcanovi je sucastou triedy osoba
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,6 +46,15 @@ public class Osoba {
 
     public void setPohlavie(Pohlavie pohlavie) {
         this.pohlavie = pohlavie;
+    }
+
+    @Override
+    public String toString() {
+        return "Osoba{" +
+                "id=" + id +
+                ", pohlavie=" + pohlavie +
+                ", meno=" + meno +
+                '}' + super.toString();
     }
 }
 
