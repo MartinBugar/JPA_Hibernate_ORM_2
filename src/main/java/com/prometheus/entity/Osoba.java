@@ -35,7 +35,21 @@ public class Osoba extends Obcan{ // osoba dedi vsetko z obcana - vsetko co je v
     @OneToMany(mappedBy = "osoba")
     private List <Telefon> telefons = new ArrayList<>(); //OneToMany - jedna osoba k viac telefonom
 
+    @ManyToMany(mappedBy = "osobyVSkupine")
+    private List<SkupinaKontaktov> skupinyOsoby = new ArrayList<>();
+
     public Osoba(){}
+
+    @OneToOne(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Adresa adresa;
+
+    public Adresa getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(Adresa adresa) {
+        this.adresa = adresa;
+    }
 
     @Override
     public String toString() {

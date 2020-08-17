@@ -9,7 +9,7 @@ public class Telefon { // toto je child trieda
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
+    @Column(name = "cislo")
     private String cislo;
 
     @ManyToOne//vela telefonov pre jednu osobu

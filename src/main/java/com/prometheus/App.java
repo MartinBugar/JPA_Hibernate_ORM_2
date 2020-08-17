@@ -1,11 +1,9 @@
 package com.prometheus;
 
-import com.prometheus.entity.Meno;
-import com.prometheus.entity.Message;
-import com.prometheus.entity.Osoba;
-import com.prometheus.entity.Telefon;
+import com.prometheus.entity.*;
 import com.prometheus.enums.Pohlavie;
 
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -49,7 +47,7 @@ public class App
 //        entityManager.getTransaction().commit();
 
 
-        // saveOsobaPrintOsoba(entityManager);
+         //saveOsobaPrintOsoba(entityManager);
         //saveTelefonKOsobe(entityManager);
         // saveTelefon(entityManager);
         //deleteTelefon(entityManager);
@@ -57,8 +55,66 @@ public class App
         //getTelefon(entityManager);
         // saveViacTelefonovKOsobe(entityManager);
         //nacitajOsobuPridajTelefon(entityManager);
-        saveOsobaSaveTelefony(entityManager);
+        //saveOsobaSaveTelefony(entityManager);
+        //saveSkupinuAOsoby(entityManager);
+        //loadSkupina(entityManager);
+        addAdresaOsobe(entityManager);
         entityManager.close();
+
+    }
+
+    private static void addAdresaOsobe (EntityManager  entityManager){
+
+        entityManager.getTransaction().begin();
+        Osoba osoba = entityManager.find(Osoba.class, 13L);
+
+        Adresa adresa = new Adresa();
+        adresa.setMesto("Bratislava");
+        adresa.setUlica("Kosicka");
+        adresa.setPsc("82101");
+        adresa.setOsoba(osoba);
+
+        entityManager.persist(adresa);
+        entityManager.getTransaction().commit();
+    }
+
+    private static void deleteSkupina(EntityManager entityManager){
+        entityManager.getTransaction().begin();
+
+        SkupinaKontaktov skupinaKontaktov = entityManager.find(SkupinaKontaktov.class,1L);
+        entityManager.remove(skupinaKontaktov);
+
+        entityManager.getTransaction().commit();
+    }
+
+    private static void loadSkupina(EntityManager entityManager){
+        SkupinaKontaktov skupinaKontaktov = entityManager.find(SkupinaKontaktov.class,1L);
+        System.out.println(skupinaKontaktov);
+    }
+
+    private static void saveSkupinuAOsoby (EntityManager entityManager){
+        entityManager.getTransaction().begin();
+
+        Osoba osoba1  = entityManager.find(Osoba.class,13L);
+        Osoba osoba2 = entityManager.find(Osoba.class,14L);
+        Osoba osoba3 =  entityManager.find(Osoba.class,15L);
+
+        SkupinaKontaktov skupinaKontaktov1 = new SkupinaKontaktov();
+        skupinaKontaktov1.setNazovSkupiny("Skupina1");
+        skupinaKontaktov1.getOsobyVSkupine().add(osoba1);
+        skupinaKontaktov1.getOsobyVSkupine().add(osoba2);
+
+        SkupinaKontaktov skupinaKontaktov2 = new SkupinaKontaktov();
+        skupinaKontaktov2.setNazovSkupiny("Skupina2");
+        skupinaKontaktov2.getOsobyVSkupine().add(osoba2);
+        skupinaKontaktov2.getOsobyVSkupine().add(osoba3);
+
+        entityManager.persist(skupinaKontaktov1);
+        entityManager.persist(skupinaKontaktov2);
+
+        entityManager.getTransaction().commit();
+
+
 
     }
 
@@ -212,7 +268,7 @@ public class App
     private static void saveOsobaPrintOsoba(EntityManager entityManager) {
         Osoba osoba1 = new Osoba();
         osoba1.setPohlavie(Pohlavie.MUZ);
-        osoba1.setMeno(new Meno("Mgr.","Peter","Juraj","Kratky","Phd"));
+        osoba1.setMeno(new Meno("Mgr.","SURIKATA","Juraj","Kratky","Phd"));
         osoba1.setCisloOp("xx4568xx55");
 
         entityManager.getTransaction().begin();
