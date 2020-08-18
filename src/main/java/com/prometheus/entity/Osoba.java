@@ -5,7 +5,9 @@ import com.prometheus.enums.Pohlavie;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 //parent trieda
@@ -32,15 +34,15 @@ public class Osoba extends Obcan{ // osoba dedi vsetko z obcana - vsetko co je v
     // ak je na jednej strane ManyToOne  a na druhej stranke OneToMany tak je to obojsmerne
     //kazda obojsmerna asociacia musi mat nejakeho vlastnika, vlastnik je vzdy child strana
     //parentova strana je referencovana
-    @OneToMany(mappedBy = "osoba")
-    private List <Telefon> telefons = new ArrayList<>(); //OneToMany - jedna osoba k viac telefonom
+    @OneToMany(mappedBy = "osoba",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Telefon> telefons = new HashSet<>(); //OneToMany - jedna osoba k viac telefonom
 
-    @ManyToMany(mappedBy = "osobyVSkupine")
-    private List<SkupinaKontaktov> skupinyOsoby = new ArrayList<>();
+    @ManyToMany(mappedBy = "osobyVSkupine", fetch = FetchType.LAZY)
+    private Set<SkupinaKontaktov> skupinyOsoby = new HashSet<>();
 
     public Osoba(){}
 
-    @OneToOne(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "osoba", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private Adresa adresa;
 
     public Adresa getAdresa() {
@@ -61,11 +63,11 @@ public class Osoba extends Obcan{ // osoba dedi vsetko z obcana - vsetko co je v
                 '}' + super.toString();
     }
 
-    public List<Telefon> getTelefons() {
+    public Set<Telefon> getTelefons() {
         return telefons;
     }
 
-    public void setTelefons(List<Telefon> telefons) {
+    public void setTelefons(Set<Telefon> telefons) {
         this.telefons = telefons;
     }
 

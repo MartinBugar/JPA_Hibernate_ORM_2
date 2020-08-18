@@ -8,7 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Hello world!
@@ -58,9 +60,15 @@ public class App
         //saveOsobaSaveTelefony(entityManager);
         //saveSkupinuAOsoby(entityManager);
         //loadSkupina(entityManager);
-        addAdresaOsobe(entityManager);
+        //addAdresaOsobe(entityManager);
+        loadOsoba(entityManager);
         entityManager.close();
 
+    }
+
+    private static void loadOsoba(EntityManager entityManager){
+        Osoba osoba = entityManager.find(Osoba.class,13L);
+        //System.out.println(osoba);
     }
 
     private static void addAdresaOsobe (EntityManager  entityManager){
@@ -73,6 +81,8 @@ public class App
         adresa.setUlica("Kosicka");
         adresa.setPsc("82101");
         adresa.setOsoba(osoba);
+
+        entityManager.flush();// zosynchronizuje sa kontext s databazou ale nic sa este neulozi, ulozi sa to az po comitte
 
         entityManager.persist(adresa);
         entityManager.getTransaction().commit();
@@ -152,7 +162,7 @@ public class App
         osoba.setPohlavie(Pohlavie.MUZ);
         osoba.setMeno(new Meno(null, null, "Martin",null,"LALALA"));
         osoba.setCisloOp("X458XXXXX");
-        ArrayList <Telefon> telefons = new ArrayList<>();
+        Set<Telefon> telefons = new HashSet<>();
 
         Telefon telefon1 = new Telefon();
         telefon1.setCislo("01111111111");
