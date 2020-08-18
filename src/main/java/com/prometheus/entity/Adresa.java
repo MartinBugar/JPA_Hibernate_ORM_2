@@ -7,7 +7,12 @@ import java.util.Objects;
 public class Adresa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     private String ulica;
     private String mesto;
     private String psc;
@@ -16,6 +21,10 @@ public class Adresa {
     private Osoba osoba;
 
     public Adresa (){}
+
+    public Long getId() {
+        return id;
+    }
 
     public String getUlica() {
         return ulica;

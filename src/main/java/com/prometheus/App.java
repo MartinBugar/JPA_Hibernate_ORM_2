@@ -1,5 +1,6 @@
 package com.prometheus;
 
+import com.prometheus.crud.impl.AdresaRepository;
 import com.prometheus.entity.*;
 import com.prometheus.enums.Pohlavie;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -18,7 +19,7 @@ import java.util.Set;
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws InterruptedException
     {
         //System.out.println( "Hello W
 
@@ -90,22 +91,52 @@ public class App
 
 
 
-        Osoba osoba = loadOsobaDetach(entityManager);
-        osoba = mergeOsoba(entityManager,osoba);
-        entityManager.close();
+//        Osoba osoba = loadOsobaDetach(entityManager);
+//        osoba = mergeOsoba(entityManager,osoba);
+//        entityManager.close();
 
 
        // entityManager.close();
 
+//CRUD operacie
+
+        AdresaRepository adresaRepository = new AdresaRepository(entityManager);
+        // CREATE ---------------------------------------------------------------------------------------------------------------------------------------
+        Adresa adresa1 = new Adresa();
+        adresa1.setUlica("kvetinova");
+        adresa1.setPsc("958412");
+        adresa1.setMesto("Trebisov");
+
+        Adresa adresa2 = new Adresa();
+        adresa2.setUlica("nevedzova");
+        adresa2.setPsc("9999555");
+        adresa2.setMesto("Komjatice");
+
+
+        adresaRepository.create(adresa1);
+        adresaRepository.create(adresa2);
+
+
+        //  READ----------------------------------------------------------------------------------------------
+        Adresa adresaZdb = adresaRepository.read(Adresa.class,1L);
+        System.out.println(adresaZdb);
+
+
+        //  UPDATE---------------------------------------------------------------------------------------------
+
+        Adresa adresaMoja = new Adresa();
+        adresaMoja.setId(1L);
+        adresaMoja.setUlica("Menim adresu 10");
+        adresaRepository.update(adresaMoja);
+
+        //    Delete----------------------------------------------------------------------------------------
+
+        Adresa adresaDelete = adresaRepository.read(Adresa.class,1L)
+        adresaRepository.delete(adresaDelete);
+
     }
 
-//    public static void queryDSL (EntityManager entityManager){
-//        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
-//
-//        QOsoba osoba = QOsoba.osoba;
-//        List <Osoba> osoby = jpaQueryFactory.selectFrom(osoba).where(osoba.meno.stredneMeno.eq("Phd")).fetch();
-//        System.out.println(osoby);
-//    }
+
 
 
     private static Osoba loadOsobaDetach (EntityManager entityManager){
