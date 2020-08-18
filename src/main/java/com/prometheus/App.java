@@ -3,6 +3,7 @@ package com.prometheus;
 import com.prometheus.entity.*;
 import com.prometheus.enums.Pohlavie;
 
+
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -61,8 +62,30 @@ public class App
         //saveSkupinuAOsoby(entityManager);
         //loadSkupina(entityManager);
         //addAdresaOsobe(entityManager);
-        loadOsoba(entityManager);
+        //loadOsoba(entityManager);
+        nativeQuery(entityManager);
         entityManager.close();
+
+    }
+
+    public static void nativeQuery (EntityManager entityManager){
+        entityManager.getTransaction().begin();
+        List<Telefon> cisla = entityManager.createNativeQuery("select * from telefon",Telefon.class).getResultList();
+
+
+//        List<Object[]> cisla = entityManager.createNativeQuery("select * from telefon").getResultList(); // aj takto to ide
+//        for (Object[] cislo : cisla){
+//            Integer id =  cislo[0];
+//            String telCislo = (String) cislo[1];
+//            Integer osobaId = (Integer) cislo[2];
+//            System.out.println("id = " + id + ", cislo = " + telCislo + ", osoba_id = " + osobaId);
+//        }
+
+        for (Telefon telefon : cisla){
+            System.out.println("id = " + telefon.getId() + ", cislo = " + telefon.getCislo()  + ", osoba_id = " + telefon.getOsoba().getId());
+        }
+
+        entityManager.getTransaction().commit();
 
     }
 
