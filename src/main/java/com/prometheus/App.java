@@ -5,13 +5,9 @@ import com.prometheus.enums.Pohlavie;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Root;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -69,8 +65,37 @@ public class App
         //addAdresaOsobe(entityManager);
         //loadOsoba(entityManager);
         //nativeQuery(entityManager);
-        queryDSL(entityManager);
+        //queryDSL(entityManager);
+
+        //try catch finely blok by sa mal  pouzivat zakazdym ked sa pusti transakcia, spring to  spravi sam
+//        try {
+//            entityManager.getTransaction().begin();
+//            //nieco sa deje
+//
+//
+//
+//            entityManager.getTransaction().commit();
+//        }
+//        catch (Exception  e) {
+//            try {
+//                    entityManager.getTransaction().rollback();
+//                }
+//                 catch ( Exception ex){
+//                    //nepodarilo sa rollbacknut
+//                    }
+//        }
+//        finally {
+//            entityManager.close();
+//        }
+
+
+
+        Osoba osoba = loadOsobaDetach(entityManager);
+        osoba = mergeOsoba(entityManager,osoba);
         entityManager.close();
+
+
+       // entityManager.close();
 
     }
 
@@ -81,6 +106,23 @@ public class App
 //        List <Osoba> osoby = jpaQueryFactory.selectFrom(osoba).where(osoba.meno.stredneMeno.eq("Phd")).fetch();
 //        System.out.println(osoby);
 //    }
+
+
+    private static Osoba loadOsobaDetach (EntityManager entityManager){
+        entityManager.getTransaction().begin();
+        Osoba osoba = entityManager.find(Osoba.class, 13L);
+        entityManager.detach(osoba); // odpojenie objektu od persistovania - neuklada do databazy
+        osoba.setPohlavie(Pohlavie.ZENA);
+        entityManager.getTransaction().commit();
+        return osoba;
+    }
+
+    private static Osoba mergeOsoba (EntityManager entityManager, Osoba osoba){
+        entityManager.getTransaction().begin();
+        osoba = entityManager.merge(osoba); //  toto pripoji osobu po odpojeni detash
+        entityManager.getTransaction().commit();
+        return osoba;
+    }
 
     private static void queryDSL(EntityManager entityManager) {
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
