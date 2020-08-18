@@ -24,10 +24,12 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        //System.out.println( "Hello W
 
+        // toto ma byt v projekte  len jeden kratorld!" );
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.prometheus.jpa_Hibernate_ORM_2");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
+
 
         //POSIELANIE DAT DO DATABAZY
 //        entityManager.getTransaction().begin();
@@ -72,12 +74,22 @@ public class App
 
     }
 
-    public static void queryDSL (EntityManager entityManager){
+//    public static void queryDSL (EntityManager entityManager){
+//        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+//
+//        QOsoba osoba = QOsoba.osoba;
+//        List <Osoba> osoby = jpaQueryFactory.selectFrom(osoba).where(osoba.meno.stredneMeno.eq("Phd")).fetch();
+//        System.out.println(osoby);
+//    }
+
+    private static void queryDSL(EntityManager entityManager) {
         JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
 
         QOsoba osoba = QOsoba.osoba;
-        List <Osoba> osoby = jpaQueryFactory.selectFrom(osoba).where(osoba.meno.stredneMeno.eq("Kratky")).fetch();
+        List<Osoba> osoby = jpaQueryFactory.selectFrom(osoba)
+                .where(osoba.id.eq(10L)).fetch();
         System.out.println(osoby);
+
     }
 
 
