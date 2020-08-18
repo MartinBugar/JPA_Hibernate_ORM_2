@@ -1,0 +1,17 @@
+com\prometheus\entity\QMeno.class
+com\prometheus\enums\Pohlavie.class
+com\prometheus\entity\Adresa.class
+com\prometheus\entity\Osoba.class
+com\prometheus\App.class
+com\prometheus\entity\Message.class
+com\prometheus\entity\QOsoba.class
+com\prometheus\entity\QTelefon.class
+com\prometheus\entity\Meno.class
+com\prometheus\entity\SkupinaKontaktov.class
+com\prometheus\converters\PohlavieConverter.class
+com\prometheus\entity\Telefon.class
+com\prometheus\entity\QAdresa.class
+com\prometheus\entity\QObcan.class
+com\prometheus\entity\QSkupinaKontaktov.class
+com\prometheus\entity\Obcan.class
+com\prometheus\entity\QMessage.class
