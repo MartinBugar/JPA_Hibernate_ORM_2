@@ -2,12 +2,15 @@ package com.prometheus;
 
 import com.prometheus.entity.*;
 import com.prometheus.enums.Pohlavie;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 
 
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -63,10 +66,20 @@ public class App
         //loadSkupina(entityManager);
         //addAdresaOsobe(entityManager);
         //loadOsoba(entityManager);
-        nativeQuery(entityManager);
+        //nativeQuery(entityManager);
+        queryDSL(entityManager);
         entityManager.close();
 
     }
+
+    public static void queryDSL (EntityManager entityManager){
+        JPAQueryFactory jpaQueryFactory = new JPAQueryFactory(entityManager);
+
+        QOsoba osoba = QOsoba.osoba;
+        List <Osoba> osoby = jpaQueryFactory.selectFrom(osoba).where(osoba.meno.stredneMeno.eq("Kratky")).fetch();
+        System.out.println(osoby);
+    }
+
 
     public static void nativeQuery (EntityManager entityManager){
         entityManager.getTransaction().begin();

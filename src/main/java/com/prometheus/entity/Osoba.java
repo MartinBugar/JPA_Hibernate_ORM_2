@@ -60,7 +60,9 @@ public class Osoba extends Obcan{ // osoba dedi vsetko z obcana - vsetko co je v
                 ", pohlavie=" + pohlavie +
                 ", meno=" + meno +
                 ", telefons=" + telefons +
-                '}' + super.toString();
+                ", skupinyOsoby=" + skupinyOsoby +
+                ", adresa=" + adresa +
+                '}';
     }
 
     public Set<Telefon> getTelefons() {
