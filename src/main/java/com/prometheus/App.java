@@ -131,7 +131,7 @@ public class App
 
         //    Delete----------------------------------------------------------------------------------------
 
-        Adresa adresaDelete = adresaRepository.read(Adresa.class,1L)
+        Adresa adresaDelete = adresaRepository.read(Adresa.class,1L);
         adresaRepository.delete(adresaDelete);
 
     }
