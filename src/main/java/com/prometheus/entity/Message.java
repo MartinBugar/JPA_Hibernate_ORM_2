@@ -1,5 +1,8 @@
 package com.prometheus.entity;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -7,6 +10,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "Message")
 public class Message {
+
+    private static Logger logger = LoggerFactory.getLogger(Message.class);
 
 //MAPOVANIE NIE JE CASE SENSITIVE, ignorujeme velke a male pismena
 
@@ -36,6 +41,8 @@ public class Message {
     public Message (){}
 
     public Message(String message) {
+        logger.debug("som v konstruktore Message");
+        logger.warn("warning z konstruktoru v message");
         this.message = message;
     }
 

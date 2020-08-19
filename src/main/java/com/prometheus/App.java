@@ -25,16 +25,19 @@ public class App
     public static void main( String[] args ) throws InterruptedException
     {
         //System.out.println( "Hello W
-        String hodnota = "hodnota";
-        String hodnota1 = "hodnota1";
-        String hodnota2 = "hodnota2";
-        String hodnota3 = "hodnota3";
-        logger.debug("Hello world from logger");
-        logger.debug("Debug text " + hodnota + " .");
-        logger.debug("Debug text {}.", hodnota); // kucerave zatvorky sa nahradia hodnotou
-        Object [] parametre = {hodnota1, hodnota2, hodnota3};
-        logger.debug("Debug text : {} , {}, {} .", parametre);
 
+//        //Priklad na logger
+//        String hodnota = "hodnota";
+//        String hodnota1 = "hodnota1";
+//        String hodnota2 = "hodnota2";
+//        String hodnota3 = "hodnota3";
+//        logger.debug("Hello world from logger");
+//        logger.debug("Debug text " + hodnota + " .");
+//        logger.debug("Debug text {}.", hodnota); // kucerave zatvorky sa nahradia hodnotou
+//        Object [] parametre = {hodnota1, hodnota2, hodnota3};
+//        logger.debug("Debug text : {} , {}, {} .", parametre);
+
+        Message message = new Message("Sprava");
 
 
         // toto ma byt v projekte  len jeden kratorld!" );
@@ -114,39 +117,39 @@ public class App
 
 //CRUD operacie
 
-        AdresaRepository adresaRepository = new AdresaRepository(entityManager);
-        // CREATE ---------------------------------------------------------------------------------------------------------------------------------------
-        Adresa adresa1 = new Adresa();
-        adresa1.setUlica("kvetinova");
-        adresa1.setPsc("958412");
-        adresa1.setMesto("Trebisov");
-
-        Adresa adresa2 = new Adresa();
-        adresa2.setUlica("nevedzova");
-        adresa2.setPsc("9999555");
-        adresa2.setMesto("Komjatice");
-
-
-        adresaRepository.create(adresa1);
-        adresaRepository.create(adresa2);
-
-
-        //  READ----------------------------------------------------------------------------------------------
-        Adresa adresaZdb = adresaRepository.read(Adresa.class,1L);
-        System.out.println(adresaZdb);
-
-
-        //  UPDATE---------------------------------------------------------------------------------------------
-
-        Adresa adresaMoja = new Adresa();
-        adresaMoja.setId((long) 1);
-        adresaMoja.setUlica("Menim adresu 1");
-        adresaRepository.update(adresaMoja);
-
-        //    Delete----------------------------------------------------------------------------------------
-
-        Adresa adresaDelete = adresaRepository.read(Adresa.class,1L);
-     //   adresaRepository.delete(adresaDelete);
+//        AdresaRepository adresaRepository = new AdresaRepository(entityManager);
+//        // CREATE ---------------------------------------------------------------------------------------------------------------------------------------
+//        Adresa adresa1 = new Adresa();
+//        adresa1.setUlica("kvetinova");
+//        adresa1.setPsc("958412");
+//        adresa1.setMesto("Trebisov");
+//
+//        Adresa adresa2 = new Adresa();
+//        adresa2.setUlica("nevedzova");
+//        adresa2.setPsc("9999555");
+//        adresa2.setMesto("Komjatice");
+//
+//
+//        adresaRepository.create(adresa1);
+//        adresaRepository.create(adresa2);
+//
+//
+//        //  READ----------------------------------------------------------------------------------------------
+//        Adresa adresaZdb = adresaRepository.read(Adresa.class,1L);
+//        System.out.println(adresaZdb);
+//
+//
+//        //  UPDATE---------------------------------------------------------------------------------------------
+//
+//        Adresa adresaMoja = new Adresa();
+//        adresaMoja.setId((long) 1);
+//        adresaMoja.setUlica("Menim adresu 1");
+//        adresaRepository.update(adresaMoja);
+//
+//        //    Delete----------------------------------------------------------------------------------------
+//
+//        Adresa adresaDelete = adresaRepository.read(Adresa.class,1L);
+//     //   adresaRepository.delete(adresaDelete);
 
     }
 
