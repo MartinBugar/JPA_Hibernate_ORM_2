@@ -69,7 +69,7 @@ public class SkupinaKontaktov {
 
 //CREATE TABLE Skupina(
 //    ID int(19) NOT NULL AUTO_INCREMENT,
-//    NAZOV varvhar(100)DEFAULT NULL,
+//    NAZOV varchar(100)DEFAULT NULL,
 //    PRIMARY KEY (ID)
 //        );
 

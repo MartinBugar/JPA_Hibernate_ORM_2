@@ -27,7 +27,7 @@ public class AdresaRepository implements CrudRepository<Adresa> {
                 //nepodarilo sa rollback
             }
         }finally {
-            entityManager.close();
+           // entityManager.close();
         }
     }
 

@@ -4,6 +4,8 @@ import com.prometheus.crud.impl.AdresaRepository;
 import com.prometheus.entity.*;
 import com.prometheus.enums.Pohlavie;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import javax.persistence.EntityManager;
@@ -17,11 +19,23 @@ import java.util.Set;
  * Hello world!
  *
  */
-public class App 
+public class App
 {
+    private static Logger logger = LoggerFactory.getLogger(App.class);
     public static void main( String[] args ) throws InterruptedException
     {
         //System.out.println( "Hello W
+        String hodnota = "hodnota";
+        String hodnota1 = "hodnota1";
+        String hodnota2 = "hodnota2";
+        String hodnota3 = "hodnota3";
+        logger.debug("Hello world from logger");
+        logger.debug("Debug text " + hodnota + " .");
+        logger.debug("Debug text {}.", hodnota); // kucerave zatvorky sa nahradia hodnotou
+        Object [] parametre = {hodnota1, hodnota2, hodnota3};
+        logger.debug("Debug text : {} , {}, {} .", parametre);
+
+
 
         // toto ma byt v projekte  len jeden kratorld!" );
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.prometheus.jpa_Hibernate_ORM_2");
@@ -125,14 +139,14 @@ public class App
         //  UPDATE---------------------------------------------------------------------------------------------
 
         Adresa adresaMoja = new Adresa();
-        adresaMoja.setId(1L);
-        adresaMoja.setUlica("Menim adresu 10");
+        adresaMoja.setId((long) 1);
+        adresaMoja.setUlica("Menim adresu 1");
         adresaRepository.update(adresaMoja);
 
         //    Delete----------------------------------------------------------------------------------------
 
         Adresa adresaDelete = adresaRepository.read(Adresa.class,1L);
-        adresaRepository.delete(adresaDelete);
+     //   adresaRepository.delete(adresaDelete);
 
     }
 
