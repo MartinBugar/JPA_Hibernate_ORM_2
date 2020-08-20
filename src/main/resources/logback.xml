@@ -1,20 +1,54 @@
 <configuration>
-
+    <property resource="logbacknastavenia.properties" />
+    <variable scope="context" name="contextPremenna" value="toto je premenna z contextu" />
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
-            <pattern>[%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>${${userid}.password:-${default}}    ${contextPremenna:-defaultna hodnota }[%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <file>logy.log</file>
+<!--    <variable name="USER_HOME" value="  " />-->
+<!--    <variable scope="context" name="contextPremenna" value="toto je premenna z contextu" />-->
+
+
+
+    <appender name="FILE" class="ch.qos.logback.core.RollingFileAppender">
+<!--        <file>${USER_HOME}/logy.log</file>-->
+        <file>logFile</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"  >
+            <fileNamePattern>logFile-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!--        10 dni historie ale max 2GB dat-->
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+        </rollingPolicy>
+
+
 
         <encoder>
             <pattern>%level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
         </encoder>
     </appender>
+
+
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--        <file>${USER_HOME}/logy.log</file>-->
+        <file>${destination}</file>
+
+
+
+
+        <encoder>
+            <pattern>%level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+
+
 
 
     <logger name="com.prometheus.entity" level="DEBUG">
