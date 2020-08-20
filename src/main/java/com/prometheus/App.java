@@ -37,12 +37,18 @@ public class App
 //        Object [] parametre = {hodnota1, hodnota2, hodnota3};
 //        logger.debug("Debug text : {} , {}, {} .", parametre);
 
-        Message message = new Message("Sprava");
+        while(true){
+            Thread.sleep(1000);
+            Message message = new Message("Sprava");
+        }
+
+
+
 
 
         // toto ma byt v projekte  len jeden kratorld!" );
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.prometheus.jpa_Hibernate_ORM_2");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("com.prometheus.jpa_Hibernate_ORM_2");
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 
         //POSIELANIE DAT DO DATABAZY
