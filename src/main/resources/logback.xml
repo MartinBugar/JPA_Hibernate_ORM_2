@@ -25,12 +25,34 @@
 
 
 
-    <appender name="FILE_TIME_ROLL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+<!--    <appender name="FILE_TIME_ROLL" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <file>logFile.log</file>-->
+
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            <fileNamePattern>log%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>-->
+<!--            &lt;!&ndash; 10 dní histórie ale max 2GB dát &ndash;&gt;-->
+<!--            <maxHistory>10</maxHistory>-->
+<!--            <totalSizeCap>2GB</totalSizeCap>-->
+
+<!--            &lt;!&ndash;1.  log.%d   log.2019-01-15 ; log.2019-01-16&ndash;&gt;-->
+<!--            &lt;!&ndash;2.	/logy/%d{yyyy/MM}/log.txt  -  /logy/2019/01/log.txt  /logy/2019/02/log.txt&ndash;&gt;-->
+<!--            &lt;!&ndash;3. log%d{yyyy-MM-dd_HH-mm}.log&ndash;&gt;-->
+
+<!--        </rollingPolicy>-->
+
+<!--        <encoder>-->
+<!--            <pattern>%level [%thread] %logger{10} [%file:%line] %msg%n</pattern>-->
+<!--        </encoder>-->
+<!--    </appender>-->
+
+
+    <appender name="FILE_TIME_ROLL" class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
         <file>logFile.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <fileNamePattern>log%d{yyyy-MM-dd_HH-mm}.%i.log</fileNamePattern>
             <!-- 10 dní histórie ale max 2GB dát -->
+            <maxFileSize>100MB</maxFileSize>
             <maxHistory>10</maxHistory>
             <totalSizeCap>2GB</totalSizeCap>
 
