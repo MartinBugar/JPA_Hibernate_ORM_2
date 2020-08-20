@@ -1,0 +1,12 @@
+ERROR [main] c.p.Main [Main.java:10] prometheus.com log1
+ERROR [main] c.p.Main [Main.java:11] bez linku log2
+ERROR [main] c.p.Main [Main.java:12] prometheus.com log3
+ERROR [main] c.p.Main [Main.java:13] prometheus.com log4
+ERROR [main] c.p.Main [Main.java:10] prometheus.com log1
+ERROR [main] c.p.Main [Main.java:11] bez linku log2
+ERROR [main] c.p.Main [Main.java:12] prometheus.com log3
+ERROR [main] c.p.Main [Main.java:13] prometheus.com log4
+ERROR [main] c.p.Main [Main.java:10] prometheus.com log1
+ERROR [main] c.p.Main [Main.java:11] bez linku log2
+ERROR [main] c.p.Main [Main.java:12] prometheus.com log3
+ERROR [main] c.p.Main [Main.java:13] prometheus.com log4

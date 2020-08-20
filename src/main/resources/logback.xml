@@ -1,13 +1,18 @@
-<configuration>
+<configuration debug="true" scan="true" scanPeriod="30 seconds">
     <contextName>mojaAplikacia</contextName>
 
     <property resource="logbacknastavenia.properties" />
     <variable scope="context" name="contextPremenna" value="toto je premenna z kontextu" />
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="com.prometheus.filters.VlastnyFilter" >
+            <levelElement>ERROR</levelElement>
+        </filter>
+
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
-            <pattern>${${userid}.password:-${default}}    ${contextPremenna:-defaultna hodnota} [%thread] %-5level %logger{36} - %msg%n</pattern>
+<!--            <pattern>${${userid}.password:-${default}}    ${contextPremenna:-defaultna hodnota} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+            <pattern>[%red(%d{HH:mm:ss.SSS}  [%level])] %msg %n</pattern>
         </encoder>
     </appender>
 
@@ -25,25 +30,25 @@
 
 
 
-<!--    <appender name="FILE_TIME_ROLL" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
-<!--        <file>logFile.log</file>-->
+    <appender name="FILE_TIME_ROLL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logFile.log</file>
 
-<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
-<!--            <fileNamePattern>log%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>-->
-<!--            &lt;!&ndash; 10 dní histórie ale max 2GB dát &ndash;&gt;-->
-<!--            <maxHistory>10</maxHistory>-->
-<!--            <totalSizeCap>2GB</totalSizeCap>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <!-- 10 dní histórie ale max 2GB dát -->
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
 
-<!--            &lt;!&ndash;1.  log.%d   log.2019-01-15 ; log.2019-01-16&ndash;&gt;-->
-<!--            &lt;!&ndash;2.	/logy/%d{yyyy/MM}/log.txt  -  /logy/2019/01/log.txt  /logy/2019/02/log.txt&ndash;&gt;-->
-<!--            &lt;!&ndash;3. log%d{yyyy-MM-dd_HH-mm}.log&ndash;&gt;-->
+            <!--1.  log.%d   log.2019-01-15 ; log.2019-01-16-->
+            <!--2.	/logy/%d{yyyy/MM}/log.txt  -  /logy/2019/01/log.txt  /logy/2019/02/log.txt-->
+            <!--3. log%d{yyyy-MM-dd_HH-mm}.log-->
 
-<!--        </rollingPolicy>-->
+        </rollingPolicy>
 
-<!--        <encoder>-->
-<!--            <pattern>%level [%thread] %logger{10} [%file:%line] %msg%n</pattern>-->
-<!--        </encoder>-->
-<!--    </appender>-->
+        <encoder>
+            <pattern>%level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
 
 
     <appender name="FILE_TIME_ROLL" class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -63,6 +68,7 @@
         </rollingPolicy>
 
         <encoder>
+<!--            <pattern>%level [%thread] %logger{10} [%file:%line] %msg%n</pattern>-->
             <pattern>%level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
         </encoder>
     </appender>
